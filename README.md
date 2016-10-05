@@ -1,7 +1,9 @@
 Note
 ====
 The original [*Seshat*](https://github.com/falvaro/seshat) by [Francisco Álvaro](https://github.com/falvaro) uses some out-dated/deprecated language features which lead to compilation errors on modern C++ compilers. 
-This fork tries to fix such issues so that more people can play with this excellent handwritten math expression parser.
+This fork fixes such issues so that more people can play with this excellent handwritten math expression parser.
+
+The current code has been compiled successfully on macOS 10.12. However, the dependency on [Xerces-C++](http://xerces.apache.org/xerces-c/index.html) has been removed temporarily. Therefore, it does not accept input in InkML format for now.
 
 SESHAT: Handwritten math expression parser
 ==========================================
