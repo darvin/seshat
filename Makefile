@@ -1,6 +1,6 @@
 CC=g++
 LINK=-lxerces-c -lm
-FLAGS = -O3 -Wno-unused-result #-I/path/to/boost/
+FLAGS = -O3 -Wno-unused-result -I/Users/lvdiwang/Downloads/boost_1_56_0/
 
 OBJFEAS=symfeatures.o featureson.o online.o
 OBJMUESTRA=sample.o stroke.o
