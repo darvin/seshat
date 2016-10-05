@@ -265,6 +265,9 @@ template <class T> static T bound (
     const T& v, const T& minVal, const T& maxVal) {
   return min(max(minVal, v), maxVal);
 }
+
+template<class C, class T, class R> static basic_ostream<C, T>& operator <<(basic_ostream<C, T>& out, const R& r);
+
 //CAST OPERATIONS
 template<class T> static string str(const T& t) {
   stringstream ss;
