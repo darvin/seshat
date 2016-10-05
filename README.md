@@ -1,3 +1,8 @@
+Note
+====
+The original [*Seshat*](https://github.com/falvaro/seshat) by [Francisco Álvaro](https://github.com/falvaro) uses some out-dated/deprecated language features which lead to compilation errors on modern C++ compilers. 
+This fork tries to fix such issues so that more people can play with this excellent handwritten math expression parser.
+
 SESHAT: Handwritten math expression parser
 ==========================================
 *Seshat* is an open-source system for recognizing handwritten
