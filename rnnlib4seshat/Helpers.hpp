@@ -408,7 +408,7 @@ pair<typename range_value<R>::type, typename range_value<R>::type>
 minmax(const R& r) {
   pair<
     typename range_const_iterator<R>::type,
-    typename range_const_iterator<R>::type> p = minmax_element(
+    typename range_const_iterator<R>::type> p = boost::minmax_element(
         boost::begin(r), boost::end(r));
   return make_pair(*p.first, *p.second);
 }
