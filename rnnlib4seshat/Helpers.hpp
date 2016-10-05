@@ -805,24 +805,24 @@ template<class R1, class R2> static void range_divide_equals(
 //TUPLE OPERATIONS
 template<class T1, class T2> static ostream& operator << (
     ostream& out, const tuple<T1, T2>& t) {
-  out << t.get<0>() << " " << t.get<1>();
+  out << std::get<0>(t) << " " << std::get<1>(t);
   return out;
 }
 template<class T1, class T2, class T3> static ostream& operator << (
     ostream& out, const tuple<T1, T2, T3>& t) {
-  out << t.get<0>() << " " << t.get<1>() << " " << t.get<2>();
+  out << std::get<0>(t) << " " << std::get<1>(t) << " " << std::get<2>(t);
   return out;
 }
 template<class T1, class T2, class T3, class T4> static ostream& operator << (
     ostream& out, const tuple<T1, T2, T3, T4>& t) {
-  out << t.get<0>() << " " << t.get<1>() << " " << t.get<2>() << " "
-      << t.get<3>();
+  out << std::get<0>(t) << " " << std::get<1>(t) << " " << std::get<2>(t) << " "
+      << std::get<3>(t);
   return out;
 }
 template<class T1, class T2, class T3, class T4, class T5>
 static ostream& operator << (ostream& out, const tuple<T1, T2, T3, T4, T5>& t) {
-  out << t.get<0>() << " " << t.get<1>() << " " << t.get<2>() << " "
-      << t.get<3>() << " " << t.get<4>();
+  out << std::get<0>(t) << " " << std::get<1>(t) << " " << std::get<2>(t) << " "
+      << std::get<3>(t) << " " << std::get<4>(t);
   return out;
 }
 //PAIR OPERATIONS
