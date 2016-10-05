@@ -488,14 +488,15 @@ template <class R> static typename range_value<R>::type max(const R& r) {
 template <class C, class Tr, class R> static void print_range(
     basic_ostream<C, Tr>& out, const R& r,
     const basic_string<C, Tr>& delim = " ") {
-  typename range_const_iterator<R>::type b = boost::begin(r);
-  typename range_const_iterator<R>::type e = boost::end(r);
+  /*auto b = boost::begin(r);
+  auto e = boost::end(r);
   if (b != e) {
     out << *b;
     while (++b != e) {
       out << delim << *b;
     }
-  }
+  }*/
+  out << " [[Call to print_range() skipped]] ";
 }
 template <class C, class Tr, class R> static void print_range(
     basic_ostream<C, Tr>& out, const R& r, const char delim) {
