@@ -1,5 +1,5 @@
 CC=g++
-LINK=-lxerces-c -lm
+LINK=-lm #-lxerces-c
 FLAGS = -O3 -Wno-unused-result -I/Users/lvdiwang/Downloads/boost_1_56_0/
 
 OBJFEAS=symfeatures.o featureson.o online.o
