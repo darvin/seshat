@@ -305,7 +305,7 @@ int SymRec::classify(Sample *M, SegmentHyp *SegHyp, const int NB, int *vclase, f
   delete[] img;
 
   //n-best classification
-  pair<float,int> clason[NB], clasoff[NB], clashyb[2*NB];
+  vector<pair<float,int> > clason(NB), clasoff(NB), clashyb(2*NB);
     
   for(int i=0; i<NB; i++) {
     clason[i].first = 0.0; //probability
@@ -358,7 +358,7 @@ int SymRec::classify(Sample *M, SegmentHyp *SegHyp, const int NB, int *vclase, f
     }
   }
     
-  sort( clashyb, clashyb+hybnext, std::greater< pair<float,int> >() );
+  sort( clashyb.begin(), clashyb.begin()+hybnext, std::greater< pair<float,int> >() );
   for(int i=0; i<min(hybnext, NB); i++) {
     vpr[i]    = clashyb[i].first;
     vclase[i] = clashyb[i].second;
@@ -368,7 +368,7 @@ int SymRec::classify(Sample *M, SegmentHyp *SegHyp, const int NB, int *vclase, f
 }
 
 
-void SymRec::BLSTMclassification( Mdrnn *net, DataSequence *seq, pair<float,int> *claspr, const int NB ) {
+void SymRec::BLSTMclassification( Mdrnn *net, DataSequence *seq, vector<pair<float,int> >& claspr, const int NB ) {
   //Classify sample with net
   net->train(*seq);
 

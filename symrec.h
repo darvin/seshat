@@ -57,7 +57,7 @@ class SymRec{
   int C; //Number of classes
   
   int  classify(Sample *M, SegmentHyp *SegHyp, const int NB, int *vclase, float *vpr, int *as, int *ds);
-  void BLSTMclassification( Mdrnn *net, DataSequence *seq, pair<float,int> *claspr, const int NB );
+  void BLSTMclassification( Mdrnn *net, DataSequence *seq, vector<pair<float,int> >& claspr, const int NB );
   
  public:
   SymRec(char *path);
