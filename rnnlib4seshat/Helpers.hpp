@@ -55,6 +55,7 @@ along with RNNLIB.  If not, see <http://www.gnu.org/licenses/>.*/
 #include <boost/math/distributions.hpp>
 #include <boost/assign/list_of.hpp>
 #include <boost/range/irange.hpp>
+#include <boost/tuple/tuple.hpp>
 #include <math.h>
 #include <numeric>
 #include <utility>

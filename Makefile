@@ -1,6 +1,5 @@
-CC=g++
 LINK=-lm #-lxerces-c
-FLAGS = -O3 -Wno-unused-result -I/Users/lvdiwang/Downloads/boost_1_56_0/
+FLAGS = -O3 -Wno-unused-result -I/build-deps/boost_1_56_0/
 
 OBJFEAS=symfeatures.o featureson.o online.o
 OBJMUESTRA=sample.o stroke.o
@@ -94,3 +93,9 @@ Optimiser.o: rnnlib4seshat/Optimiser.cpp
 
 clean:
 	rm -f *.o *~ \#*\#
+
+build-on-docker:
+	docker build -t emscripten-for-seshat .
+	#docker run --rm -v `pwd`:/src emscripten-for-seshat make	
+	docker run --rm -v `pwd`:/src emscripten-for-seshat emmake make
+	docker run --rm -v `pwd`:/src emscripten-for-seshat	emcc -O1 project.bc -o seshat.js
