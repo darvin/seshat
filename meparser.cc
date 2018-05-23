@@ -931,13 +931,12 @@ char *meParser::parse_me(Sample *M) {
   // if( M->getOutDot() )
   //   save_dot( mlh, M->getOutDot() );
 
-  // string clatex = mlh->pt->getTeX( mlh->clase );
-  // printf("got tex \n");
-  // char * charLatex = new char [clatex.length()+1];
-  // printf("Latex: %s \n",clatex.c_str());
-  // strcpy (charLatex, clatex.c_str());
-  // printf("Latex2: %s \n",charLatex);
-  return "heayo" ; //charLatex;
+  char * clatex = mlh->prod->get_outstr();
+  printf("got tex \n");
+  char * charLatex = new char [strlen(clatex)+1];
+  strcpy (charLatex, clatex);
+  printf("Latex2: %s \n",charLatex);
+  return charLatex;
 }
 
 /*************************************
