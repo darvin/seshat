@@ -22,3 +22,5 @@
 
 # IDE ignorables
 .vscode/*
+
+build/

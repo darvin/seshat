@@ -95,7 +95,11 @@ clean:
 	rm -f *.o *~ \#*\#
 
 build-on-docker:
+	mkdir -p build/ || true
 	docker build -t emscripten-for-seshat .
 	#docker run --rm -v `pwd`:/src emscripten-for-seshat make	
 	docker run --rm -v `pwd`:/src emscripten-for-seshat emmake make
-	docker run --rm -v `pwd`:/src emscripten-for-seshat	emcc -O1 project.bc -o seshat.js
+	mv seshat build/seshat.bc
+	docker run --rm -v `pwd`:/src emscripten-for-seshat	emcc -O3 build/seshat.bc -o seshat.js
+	mv seshat.js build/
+	mv seshat.wasm build/
