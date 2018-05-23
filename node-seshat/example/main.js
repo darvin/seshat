@@ -48,6 +48,18 @@ $(function() {
             console.log(strokesStr);
             var mathML = seshat.recognizeSCGInk(strokesStr);
             console.log(mathML);
+            var renderedDiv = document.getElementById("mathRendered");
+            var mlDiv = document.getElementById("mathML");
+            renderedDiv.innerHTML = mathML;
+            mlDiv.text = mathML;
+
+            MathJax.Hub.Queue(
+              ["Typeset",MathJax.Hub, renderedDiv],
+              ["PreviewDone",function() {
+                console.log("mathjax done");
+              }]
+            );
+
 
         });
     });

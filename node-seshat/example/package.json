@@ -5,8 +5,9 @@
   "main": "main.js",
   "scripts": {
     "watch": "watchify -p wasmify main.js -o bundle.js -v",
+    "browserify": "browserify -p wasmify main.js -o bundle.js -v",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "live": "beefy main.js --browserify browserify --live"
+    "live": "beefy  "
   },
   "author": "",
   "license": "ISC",
