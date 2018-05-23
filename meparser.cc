@@ -926,17 +926,26 @@ char *meParser::parse_me(Sample *M) {
   print_latex( mlh );
 
   //Save InkML file of the recognized expression
-  // M->printInkML( G, mlh );
+  M->printInkML( G, mlh );
 
-  // if( M->getOutDot() )
-  //   save_dot( mlh, M->getOutDot() );
 
-  char * clatex = mlh->prod->get_outstr();
-  printf("got tex \n");
-  char * charLatex = new char [strlen(clatex)+1];
-  strcpy (charLatex, clatex);
-  printf("Latex2: %s \n",charLatex);
-  return charLatex;
+  const char *foutName = "/temp-output";
+  FILE *fout=fopen(foutName, "w");
+  m.writeMathML(fout, G, mlh);
+  fclose(fout);
+
+  FILE *f = fopen(foutName, "rb");
+  fseek(f, 0, SEEK_END);
+  long fsize = ftell(f);
+  fseek(f, 0, SEEK_SET);  //same as rewind(f);
+
+  char *string = malloc(fsize + 1);
+  fread(string, fsize, 1, f);
+  fclose(f);
+
+  string[fsize] = 0;
+
+  return string;
 }
 
 /*************************************

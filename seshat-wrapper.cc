@@ -10,6 +10,7 @@
 
 extern "C" {
 
+
 EMSCRIPTEN_KEEPALIVE
 const char *recognizeSCGInk(const char *SCGInkText) {
  
@@ -26,7 +27,8 @@ const char *recognizeSCGInk(const char *SCGInkText) {
 
   //Parse math expression
   char *latex = seshat.parse_me(&m);
-  
+
+
   return latex;
 }
 

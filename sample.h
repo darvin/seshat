@@ -115,6 +115,7 @@ public:
 
   void print();
   void printInkML(Grammar *G, Hypothesis *H);
+  void writeMathML(FILE *fout, Grammar *G, Hypothesis *H);
   void printSymRecInkML(Hypothesis *H, FILE *fout);
 };
 

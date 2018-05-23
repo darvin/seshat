@@ -561,6 +561,35 @@ void Sample::print() {
   // }
 }
 
+void Sample::writeMathML(FILE *fout, Grammar *G, Hypothesis *H) {
+  fprintf(fout, "<math xmlns='http://www.w3.org/1998/Math/MathML'>\n");
+
+  int next_id = 0; 
+  //Save the value of next_id in order to restore it after printing the MathML expression
+  //and generating the IDs for symbols
+  int nid_bak = next_id;
+  next_id++; //Skip one ID that will be the traceGroup that starts the symbol part
+
+  //Print MathML
+  if( !H->pt )
+    H->prod->print_mathml(G, H, fout, &next_id);
+  else {
+    char tipo  = H->pt->getMLtype( H->clase );
+    char *clase = H->pt->getTeX( H->clase );
+
+    char inkid[128];
+    sprintf(inkid, "%s_%d", clase, next_id+1);
+    H->inkml_id = inkid;
+    
+    fprintf(fout, "<m%c xml:id=\"%s\">%s</m%c>\n", 
+      tipo, H->inkml_id.c_str(), clase, tipo);
+  }
+
+  //Restore next_id
+  next_id = nid_bak;
+
+  fprintf(fout, "</math>\n");
+}
 
 void Sample::printInkML(Grammar *G, Hypothesis *H) {
 
