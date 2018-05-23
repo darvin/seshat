@@ -1,16 +1,23 @@
 LINK=-lm #-lxerces-c
-FLAGS = -O3 -Wno-unused-result -I/build-deps/boost_1_56_0/
-
+EMSCRIPTEN_FLAGS = -s ALLOW_MEMORY_GROWTH=1 -s EXPORTED_FUNCTIONS='["_recognizeSCGInk"]' -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall", "cwrap"]'
+FLAGS = -O0 -Wno-unused-result -I/build-deps/boost_1_56_0/  $(EMSCRIPTEN_FLAGS)
+# CC=g++
 OBJFEAS=symfeatures.o featureson.o online.o
 OBJMUESTRA=sample.o stroke.o
-OBJPARSE=seshat.o meparser.o gparser.o grammar.o production.o symrec.o duration.o segmentation.o sparel.o gmm.o
+OBJPARSE=meparser.o gparser.o grammar.o production.o symrec.o duration.o segmentation.o sparel.o gmm.o 
 OBJTABLA=tablecyk.o cellcyk.o hypothesis.o logspace.o
 OBJRNNLIB=Random.o DataExporter.o WeightContainer.o ClassificationLayer.o Layer.o Mdrnn.o Optimiser.o
 RNNLIBHEADERS=rnnlib4seshat/DataSequence.hpp rnnlib4seshat/NetcdfDataset.hpp rnnlib4seshat/Mdrnn.hpp rnnlib4seshat/MultilayerNet.hpp rnnlib4seshat/Rprop.hpp rnnlib4seshat/SteepestDescent.hpp rnnlib4seshat/Trainer.hpp rnnlib4seshat/WeightContainer.hpp
 OBJS=$(OBJFEAS) $(OBJMUESTRA) $(OBJPARSE) $(OBJTABLA) $(OBJRNNLIB)
 
-seshat: $(OBJS)
-	$(CC) -o seshat $(OBJS) $(FLAGS) $(LINK)
+seshat: $(OBJS) seshat.o
+	$(CC) -o seshat $(OBJS) seshat.o $(FLAGS) $(LINK)
+
+seshat-wrapper: $(OBJS) seshat-wrapper.o
+	$(CC) -o seshat-wrapper $(OBJS) seshat-wrapper.o $(FLAGS) $(LINK)
+
+seshat-wrapper.o: seshat-wrapper.cc
+	$(CC) -c seshat-wrapper.cc $(FLAGS)
 
 seshat.o: seshat.cc grammar.o sample.o meparser.o
 	$(CC) -c seshat.cc $(FLAGS)
@@ -93,13 +100,18 @@ Optimiser.o: rnnlib4seshat/Optimiser.cpp
 
 clean:
 	rm -f *.o *~ \#*\#
+	rm build/seshat-wrapper.bc
+	rm node-seshat/seshat.js
+	rm node-seshat/seshat.wasm
 
 build-on-docker:
 	mkdir -p build/ || true
 	#docker build -t emscripten-for-seshat .
-	#docker run --rm -v `pwd`:/src emscripten-for-seshat make	
-	docker run --rm -v `pwd`:/src emscripten-for-seshat emmake make
-	mv seshat build/seshat.bc
-	docker run --rm -v `pwd`:/src emscripten-for-seshat	emcc -O3 build/seshat.bc -o seshat.js
+	# docker run --rm -v `pwd`:/src emscripten-for-seshat make clean
+	# docker run --rm -v `pwd`:/src emscripten-for-seshat make seshat-wrapper
+	# docker run --rm -v `pwd`:/src emscripten-for-seshat make clean
+	docker run --rm -v `pwd`:/src emscripten-for-seshat emmake make seshat-wrapper
+	mv seshat-wrapper build/seshat-wrapper.bc
+	docker run --rm -v `pwd`:/src emscripten-for-seshat	emcc $(FLAGS) build/seshat-wrapper.bc -o seshat.js --embed-file Config --embed-file SampleMathExps 
 	mv seshat.js node-seshat/
 	mv seshat.wasm node-seshat/

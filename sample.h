@@ -20,7 +20,8 @@
 
 class SymRec;
 class TableCYK;
-
+#include <sstream>
+#include <iostream>
 #include <cstdio>
 #include <list>
 #include <climits>
@@ -77,6 +78,7 @@ public:
   int bx, by, bs, bt; //Offline bounding box
 
   Sample(char *in);
+  Sample(std::istringstream &ss, bool isInkML);
   ~Sample();
 
   int dimX();

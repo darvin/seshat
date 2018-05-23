@@ -22,6 +22,8 @@
 #include <cstdlib>
 #include <climits>
 #include <vector>
+#include <sstream>
+#include <iostream>
 
 using namespace std;
 
@@ -50,6 +52,7 @@ class Stroke{
   Stroke(int np);
   Stroke(int np, FILE *fd);
   Stroke(FILE *fd);
+  Stroke(int np, std::istringstream &ss);
   Stroke(char *str, int inkml_id);
   ~Stroke();
 

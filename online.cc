@@ -36,7 +36,7 @@ covered by the following copyright and permission notice:
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "online.h"
-
+#include <climits>
 
 // Aux functions
 

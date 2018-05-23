@@ -58,6 +58,50 @@ bool isRelation(char *str) {
   return false;
 }
 
+Sample::Sample(std::istringstream &ss, bool isInkML) {
+  assert(isInkML == false);
+
+  RX = RY = 0;
+  outinkml = outdot = NULL;
+
+
+  int nstrokes, npuntos;
+
+  ss >> nstrokes;
+
+  
+  for(int i=0; i<nstrokes; i++) {
+    ss >> npuntos;
+
+    dataon.push_back(new Stroke(npuntos, ss));
+  }
+
+
+  ox = oy =  INT_MAX;
+  os = ot = -INT_MAX;
+  for(int i=0; i<nStrokes(); i++) {
+    //Compute bouding box
+    if( dataon[i]->rx < ox ) ox = dataon[i]->rx;
+    if( dataon[i]->ry < oy ) oy = dataon[i]->ry;
+    if( dataon[i]->rs > os ) os = dataon[i]->rs;
+    if( dataon[i]->rt > ot ) ot = dataon[i]->rt;
+    
+    //Compute centroid
+    dataon[i]->cx = dataon[i]->cy = 0;
+    int np;
+    for(np=0; np < dataon[i]->getNpuntos() ; np++) {
+      Punto *pto = dataon[ i ]->get(np);
+      dataon[i]->cx += pto->x;
+      dataon[i]->cy += pto->y;
+    }
+    dataon[i]->cx /= np;
+    dataon[i]->cy /= np;
+  }
+
+  //Render image representation
+  dataoff = render(&X, &Y);
+}
+
 
 Sample::Sample(char *in) {
 
