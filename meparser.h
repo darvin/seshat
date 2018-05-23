@@ -60,7 +60,7 @@ class meParser{
   ~meParser();
 
   //Parse math expression
-  void parse_me(Sample *M);
+  char *parse_me(Sample *M);
   
   //Output formatting methods
   void print_symrec(Hypothesis *H);

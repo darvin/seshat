@@ -67,11 +67,14 @@ Sample::Sample(std::istringstream &ss, bool isInkML) {
 
   int nstrokes, npuntos;
 
+  printf("SAMPLE: building sample from string\n");
   ss >> nstrokes;
 
-  
+  printf("SAMPLE: nstrokes %d\n", nstrokes);
+
   for(int i=0; i<nstrokes; i++) {
     ss >> npuntos;
+    printf("SAMPLE: npuntos %d\n", npuntos);
 
     dataon.push_back(new Stroke(npuntos, ss));
   }

@@ -53,11 +53,13 @@ Stroke::Stroke(int np, FILE *fd) {
 Stroke::Stroke(int np, std::istringstream &ss) {
   NP = np;
   pseq = new Punto[NP];
+  printf("SAMPLE: building stroke from string\n");
 
   rx = ry =  INT_MAX;
   rs = rt = -INT_MAX;
   for(int i=0; i<NP; i++) {
     ss >> pseq[i].x >> pseq[i].y;
+    printf("SAMPLE: x %f y %f\n", pseq[i].x, pseq[i].y);
     if( pseq[i].x < rx ) rx = pseq[i].x;
     if( pseq[i].y < ry ) ry = pseq[i].y;
     if( pseq[i].x > rs ) rs = pseq[i].x;

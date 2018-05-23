@@ -499,7 +499,7 @@ CellCYK *meParser::fusion(Sample *M, ProductionB *pd, Hypothesis *A, Hypothesis 
 /*************************************
 Parse Math Expression
 **************************************/
-void meParser::parse_me(Sample *M) {
+char *meParser::parse_me(Sample *M) {
 
   M->setSymRec( sym_rec );
 
@@ -918,18 +918,26 @@ void meParser::parse_me(Sample *M) {
 
   printf("\nMost Likely Hypothesis (%d strokes)\n\n", mlh->parent->talla);
 
-  printf("Math Symbols:\n");
-  print_symrec(mlh);
-  printf("\n");
+  // printf("Math Symbols:\n");
+  // print_symrec(mlh);
+  // printf("\n");
 
   printf("LaTeX:\n");
   print_latex( mlh );
 
   //Save InkML file of the recognized expression
-  M->printInkML( G, mlh );
+  // M->printInkML( G, mlh );
 
-  if( M->getOutDot() )
-    save_dot( mlh, M->getOutDot() );
+  // if( M->getOutDot() )
+  //   save_dot( mlh, M->getOutDot() );
+
+  // string clatex = mlh->pt->getTeX( mlh->clase );
+  // printf("got tex \n");
+  // char * charLatex = new char [clatex.length()+1];
+  // printf("Latex: %s \n",clatex.c_str());
+  // strcpy (charLatex, clatex.c_str());
+  // printf("Latex2: %s \n",charLatex);
+  return "heayo" ; //charLatex;
 }
 
 /*************************************

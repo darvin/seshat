@@ -16,20 +16,18 @@ const char *recognizeSCGInk(const char *SCGInkText) {
   //Because some of the feature extraction code uses std::cout/cin
   ios_base::sync_with_stdio(true);
 
+  printf("INPUT: '%s' \n", SCGInkText);
+
   //Load sample and system configuration
   std::istringstream iss(SCGInkText);
 
   Sample m( iss, false );
   meParser seshat("Config/CONFIG");
 
-  //Print sample information
-  m.print();
-  printf("\n");
-
   //Parse math expression
-  seshat.parse_me(&m);
+  char *latex = seshat.parse_me(&m);
   
-  return "haya";
+  return latex;
 }
 
 

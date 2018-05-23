@@ -1,6 +1,6 @@
 LINK=-lm #-lxerces-c
-EMSCRIPTEN_FLAGS = -s ALLOW_MEMORY_GROWTH=1 -s EXPORTED_FUNCTIONS='["_recognizeSCGInk"]' -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall", "cwrap"]'
-FLAGS = -O0 -Wno-unused-result -I/build-deps/boost_1_56_0/  $(EMSCRIPTEN_FLAGS)
+EMSCRIPTEN_FLAGS =  -s ALLOW_MEMORY_GROWTH=1 -s EXPORTED_FUNCTIONS='["_recognizeSCGInk"]' -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall", "cwrap"]'
+FLAGS = -O3 -Wno-unused-result -I/build-deps/boost_1_56_0/  $(EMSCRIPTEN_FLAGS)
 # CC=g++
 OBJFEAS=symfeatures.o featureson.o online.o
 OBJMUESTRA=sample.o stroke.o
