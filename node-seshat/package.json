@@ -1,0 +1,23 @@
+{
+  "name": "seshat",
+  "version": "1.0.0",
+  "description": "Handwritten math parsing",
+  "main": "seshat.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darvin/seshat.git"
+  },
+  "keywords": [
+    "handwritting",
+    "math"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darvin/seshat/issues"
+  },
+  "homepage": "https://github.com/darvin/seshat#readme"
+}
