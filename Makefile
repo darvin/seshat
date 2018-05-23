@@ -1,5 +1,5 @@
 LINK=-lm #-lxerces-c
-EMSCRIPTEN_FLAGS =  -s ALLOW_MEMORY_GROWTH=1 -s EXPORTED_FUNCTIONS='["_recognizeSCGInk"]' -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall", "cwrap"]'
+EMSCRIPTEN_FLAGS = -s MODULARIZE=1 -s 'EXPORT_NAME="Seshat"'  -s ALLOW_MEMORY_GROWTH=1 -s EXPORTED_FUNCTIONS='["_recognizeSCGInk"]' -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall", "cwrap"]'
 FLAGS = -O3 -Wno-unused-result -I/build-deps/boost_1_56_0/  $(EMSCRIPTEN_FLAGS)
 # CC=g++
 OBJFEAS=symfeatures.o featureson.o online.o
@@ -112,6 +112,7 @@ build-on-docker:
 	# docker run --rm -v `pwd`:/src emscripten-for-seshat make clean
 	docker run --rm -v `pwd`:/src emscripten-for-seshat emmake make seshat-wrapper
 	mv seshat-wrapper build/seshat-wrapper.bc
-	docker run --rm -v `pwd`:/src emscripten-for-seshat	emcc $(FLAGS) build/seshat-wrapper.bc -o seshat.js --embed-file Config --embed-file SampleMathExps 
+	docker run --rm -v `pwd`:/src emscripten-for-seshat	emcc $(FLAGS) build/seshat-wrapper.bc -o seshat.html --embed-file Config --embed-file SampleMathExps 
 	mv seshat.js node-seshat/
 	mv seshat.wasm node-seshat/
+	mv seshat.html node-seshat/

@@ -19,5 +19,7 @@
   "bugs": {
     "url": "https://github.com/darvin/seshat/issues"
   },
-  "homepage": "https://github.com/darvin/seshat#readme"
+  "homepage": "https://github.com/darvin/seshat#readme",
+  "dependencies": {
+  }
 }
