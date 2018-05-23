@@ -1,7 +1,5 @@
 "use strict";
 
-var R = require('ramda');
-
 var $ = require("jquery");
 var seshat = require("../seshat-wrapper.js");
 
@@ -19,6 +17,8 @@ function strokeArrToStr(strokes) {
     });
     return result;
 }
+
+
 
 $(function() {
     var $cv = $('#test');
