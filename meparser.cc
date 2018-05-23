@@ -922,16 +922,16 @@ char *meParser::parse_me(Sample *M) {
   // print_symrec(mlh);
   // printf("\n");
 
-  printf("LaTeX:\n");
-  print_latex( mlh );
+  // printf("LaTeX:\n");
+  // print_latex( mlh );
 
   //Save InkML file of the recognized expression
-  M->printInkML( G, mlh );
+  // M->printInkML( G, mlh );
 
 
   const char *foutName = "/temp-output";
   FILE *fout=fopen(foutName, "w");
-  m.writeMathML(fout, G, mlh);
+  M->writeMathML(fout, G, mlh);
   fclose(fout);
 
   FILE *f = fopen(foutName, "rb");
@@ -939,7 +939,7 @@ char *meParser::parse_me(Sample *M) {
   long fsize = ftell(f);
   fseek(f, 0, SEEK_SET);  //same as rewind(f);
 
-  char *string = malloc(fsize + 1);
+  char *string = (char *)malloc(fsize + 1);
   fread(string, fsize, 1, f);
   fclose(f);
 

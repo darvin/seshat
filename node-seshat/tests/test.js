@@ -1,47 +1,10 @@
 const seshat = require("../seshat-wrapper.js");
+const assert = require('assert');
 
 seshat.onInitialized(function() {
 
 // const resultEmpty = seshat.recognizeSCGInk();
 
-/*
-const r2 = seshat.recognizeSCGInk(
-`SCG_INK
-2
-2
-508 372
-509 373
-27
-509 373
-510 373
-522 373
-551 373
-599 373
-651 373
-666 373
-692 373
-710 373
-611 269
-611 270
-611 271
-611 275
-611 299
-611 334
-611 367
-611 408
-611 441
-611 462
-611 485
-611 501
-611 508
-611 514
-611 516
-611 517
-611 518
-611 517
-`);
-
-*/
 const r1 = seshat.recognizeSCGInk(
 `SCG_INK
 8
@@ -414,7 +377,51 @@ const r1 = seshat.recognizeSCGInk(
 	);
 
 
+console.log("r1 is :", r1);
 
+assert(r1.includes('<mi xml:id="y_5">y</mi>'));
+
+
+const r2 = seshat.recognizeSCGInk(
+`SCG_INK
+2
+2
+508 372
+509 373
+27
+509 373
+510 373
+522 373
+551 373
+599 373
+651 373
+666 373
+692 373
+710 373
+611 269
+611 270
+611 271
+611 275
+611 299
+611 334
+611 367
+611 408
+611 441
+611 462
+611 485
+611 501
+611 508
+611 514
+611 516
+611 517
+611 518
+611 517
+`);
+
+
+console.log("r2 is :", r2);
+
+assert(r2.includes('<mi xml:id="p_2">p</mi>'));
 
 
 });
