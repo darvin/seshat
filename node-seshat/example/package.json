@@ -7,17 +7,18 @@
     "watch": "watchify -p wasmify main.js -o bundle.js -v",
     "browserify": "browserify -p wasmify main.js -o bundle.js -v",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "live": "beefy  "
+    "live": "beefy  ",
+    "deploy": "gh-pages-deploy -- 'Deploying to gh pages'"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "jquery": "^3.3.1",
-    "jquery-sketch": "^1.0.0",
-    "ramda": "^0.25.0"
+    "jquery-sketch": "^1.0.0"
   },
   "devDependencies": {
     "beefy": "^2.1.8",
+    "gh-pages-deploy": "^0.5.0",
     "wasmify": "^4.0.0",
     "watchify": "^3.11.0"
   }
