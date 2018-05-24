@@ -1,40 +1,68 @@
-<!-- index.html -->
-<!doctype html>
-<html>
-  <head>
-    <title>Getting Cozy with Browserify</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <style>
-      h1, p, div { text-align: center; }
-      html       { background: #fffffe; }
-      .stroke {
-    border: solid 1px blue;
-     float : left;
-    padding: 10px;
-    margin: 5px;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Your page title here :)</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    </style>
-  </head>
-  <body>
-    <canvas id="test"></canvas>
-  
-    <button id="clear">clear</button>
-    <button id="redraw">redraw</button>
-    <button id="strokes">print strokes</button>
-    <div id="display"></div>
-    <div id="mathML"></div>
-    <div id="mathRendered"></div>
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
 
-    <script src="bundle.js"></script
+</head>
+<body>
 
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="one-half column" style="margin-top: 25%">
+        <h4>Draw math here</h4>
+        <canvas class="u-full-width" id="test"></canvas>
 
+        <button id="clear">clear</button>
+        <button id="undo">undo</button>
 
+      </div>
+      <div class="one-half column" style="margin-top: 25%">
+        <h4>output</h4>
+        <h2 class="u-full-width" id="mathRendered"></h2>
+        <pre><code class="u-full-width" id="mathML"></code> </pre>
+        <button class="copyBtn" data-clipboard-target="#mathML">Copy!
+<!--             <img src="images/clippy.svg" alt="Copy to clipboard">
+ -->        </button>
 
-  </body>
+      </div>
+    </div>
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+<script type="text/javascript">
+  new ClipboardJS('.copyBtn');
+</script>
+
+</body>
 </html>

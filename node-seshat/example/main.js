@@ -18,49 +18,72 @@ function strokeArrToStr(strokes) {
     return result;
 }
 
+function renderMath(actions) {
+    var strokes = actions.map(function(strk) {
+        if (!strk.events) {
+            return [];
+        }
+        return strk.events.map(function(pt) {
+            return [pt.x, pt.y];
+        });
+    });
+    console.log(strokes);
+    var strokesStr = strokeArrToStr(strokes);
+    console.log(strokesStr);
+    var mathML = seshat.recognizeSCGInk(strokesStr);
+    console.log(mathML);
+    var renderedDiv = document.getElementById("mathRendered");
+    renderedDiv.innerHTML = mathML;
+    $('#mathML').text(mathML.replace(/\n+/g, " "));
+    MathJax.Hub.Queue(
+      ["Typeset",MathJax.Hub, renderedDiv],
+      ["PreviewDone",function() {
+        console.log("mathjax done");
+      }]
+    );
 
+}
 
 $(function() {
     var $cv = $('#test');
     $('#test').sketch();
     var sketch = $cv.data('sketch');
   
+    var renderTimer = null;
+    var restartTimer = function() {
+        clearTimeout(renderTimer);
+        renderTimer = setTimeout(function() {
+            renderMath(sketch.actions);
+        }, 3000);
+    }
+
+
+
     $('#clear').click(function() {
-        $('#test').get(0).width = 300;
-    });
-  
-    $('#redraw').click(function() {
+        sketch.actions = [];
         sketch.redraw();
+        renderMath(sketch.actions);
     });
+    $('#undo').click(function() {
+        sketch.actions.pop();
+        sketch.redraw();
+        restartTimer();
+    });
+
     seshat.onInitialized(function () {
+        var superStartPainting = sketch.startPainting;
+        var superStopPainting = sketch.stopPainting;
+        sketch.set("startPainting", function() {
+            clearTimeout(renderTimer);
+            superStartPainting.apply(this);
+        });
 
+        sketch.set("stopPainting", function() {
+            superStopPainting.apply(this);
+            restartTimer();
+        });
         $('#strokes').click(function() {
-        	var strokes = sketch.actions.map(function(strk) {
-                if (!strk.events) {ß
-                	return [];
-                }
-                return strk.events.map(function(pt) {
-                    return [pt.x, pt.y];
-                });
-            });
-            console.log(strokes);
-            var strokesStr = strokeArrToStr(strokes);
-            console.log(strokesStr);
-            var mathML = seshat.recognizeSCGInk(strokesStr);
-            console.log(mathML);
-            var renderedDiv = document.getElementById("mathRendered");
-            var mlDiv = document.getElementById("mathML");
-            renderedDiv.innerHTML = mathML;
-            mlDiv.text = mathML;
-
-            MathJax.Hub.Queue(
-              ["Typeset",MathJax.Hub, renderedDiv],
-              ["PreviewDone",function() {
-                console.log("mathjax done");
-              }]
-            );
-
-
+            renderMath(this.actions);
         });
     });
 
